@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "current_feature": "project-skeleton",
+  "features": [
+    {
+      "id": "project-skeleton",
+      "title": "Project skeleton: FastAPI backend + React/Vite frontend + Docker compose",
+      "status": "in_progress",
+      "acceptance": [
+        "Backend runs with FastAPI and health endpoint",
+        "Frontend builds with Vite + TypeScript + React",
+        "Docker compose starts both services + Keycloak",
+        "Basic pytest and vitest tests pass"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "oidc-auth",
+      "title": "OIDC authentication with Keycloak (authorization code + PKCE)",
+      "status": "planned",
+      "acceptance": [
+        "Login redirects to Keycloak",
+        "Callback exchanges code for tokens with PKCE",
+        "Access token used for authenticated API calls",
+        "Logout clears session",
+        "Tests cover unauthenticated rejection and role denial"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "media-range-server",
+      "title": "Bounded media range responses (fixes connection starvation)",
+      "status": "planned",
+      "acceptance": [
+        "Open-ended Range requests capped at 4 MB",
+        "Content-Range header correct",
+        "Video playback works with seeking",
+        "Multiple video elements don't starve connections"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "llm-adapters",
+      "title": "LLM provider adapters (OpenAI-compatible, Anthropic, Gemini, Ollama)",
+      "status": "planned",
+      "acceptance": [
+        "Each adapter implements common interface",
+        "Configurable via env vars",
+        "Errors are redacted",
+        "CI mocks external calls"
+      ],
+      "implementation": [],
+      "tests": []
+    }
+  ]
+}

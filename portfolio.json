@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "atlas-forge-145-alan-vo",
+  "owner": "ALANDVO",
+  "email": "alanvo@gmail.com",
+  "domain": "AI/ML developer tools",
+  "summary": "Work in progress: atlas-forge-145-alan-vo",
+  "workflows": [
+    "Serve video files with capped open-ended range responses to prevent browser connection starvation",
+    "Authenticate via OIDC with Keycloak using authorization code flow and PKCE",
+    "Compose and render video from HTML templates using configurable LLM providers"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "status": "work-in-progress"
+}
