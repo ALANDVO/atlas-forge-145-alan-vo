@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: atlas-forge-backend
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./data/app.db
+      - KEYCLOAK_URL=http://keycloak:8080
+      - KEYCLOAK_REALM=atlas-forge
+      - KEYCLOAK_CLIENT_ID=atlas-forge-client
+      - KEYCLOAK_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET:-}
+      - OIDC_ISSUER=http://keycloak:8080/realms/atlas-forge
+      - OIDC_AUDIENCE=atlas-forge-client
+      - LLM_PROVIDER=openai-compatible
+      - LLM_MODEL=gpt-4o-mini
+      - LLM_BASE_URL=${LLM_BASE_URL:-}
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - CORS_ORIGINS=http://localhost:5173,http://localhost
+      - MEDIA_RANGE_PIECE_BYTES=4194304
+    volumes:
+      - backend_data:/app/data
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/api/health', timeout=5).raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: atlas-forge-frontend
+    ports:
+      - "127.0.0.1:80:80"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: atlas-forge-keycloak
+    command: start-dev --import-realm
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=dev-file
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/health/ready"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+volumes:
+  backend_data:
+  keycloak_data:
