@@ -36,7 +36,8 @@ describe('App', () => {
     })
     
     expect(screen.getByText('ok')).toBeInTheDocument()
-    expect(screen.getByText('atlas-forge-145-alan-vo')).toBeInTheDocument()
+    // Service name appears in header and in health card - check the health card one
+    expect(screen.getByTestId('health-service')).toHaveTextContent('atlas-forge-145-alan-vo')
     expect(screen.getByText('1.0.0')).toBeInTheDocument()
   })
 

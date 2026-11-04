@@ -55,7 +55,7 @@ function App() {
               <dt>Status</dt>
               <dd className={health.status === 'ok' ? 'ok' : 'error'}>{health.status}</dd>
               <dt>Service</dt>
-              <dd>{health.service}</dd>
+              <dd data-testid="health-service">{health.service}</dd>
               <dt>Version</dt>
               <dd>{health.version}</dd>
             </dl>

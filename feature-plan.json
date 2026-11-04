@@ -5,15 +5,29 @@
     {
       "id": "project-skeleton",
       "title": "Project skeleton: FastAPI backend + React/Vite frontend + Docker compose",
-      "status": "in_progress",
+      "status": "done",
       "acceptance": [
         "Backend runs with FastAPI and health endpoint",
         "Frontend builds with Vite + TypeScript + React",
         "Docker compose starts both services + Keycloak",
         "Basic pytest and vitest tests pass"
       ],
-      "implementation": [],
-      "tests": []
+      "implementation": [
+        "backend/app/main.py",
+        "backend/app/api/health.py",
+        "backend/app/api/media.py",
+        "backend/app/core/config.py",
+        "frontend/src/App.tsx",
+        "frontend/src/main.tsx",
+        "frontend/vite.config.ts",
+        "docker-compose.yaml",
+        "backend/requirements.txt",
+        "frontend/package.json"
+      ],
+      "tests": [
+        "backend/app/tests/test_main.py",
+        "frontend/src/App.test.tsx"
+      ]
     },
     {
       "id": "oidc-auth",
@@ -32,15 +46,20 @@
     {
       "id": "media-range-server",
       "title": "Bounded media range responses (fixes connection starvation)",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Open-ended Range requests capped at 4 MB",
         "Content-Range header correct",
         "Video playback works with seeking",
         "Multiple video elements don't starve connections"
       ],
-      "implementation": [],
-      "tests": []
+      "implementation": [
+        "backend/app/api/media.py",
+        "backend/app/core/config.py"
+      ],
+      "tests": [
+        "backend/app/tests/test_main.py"
+      ]
     },
     {
       "id": "llm-adapters",
