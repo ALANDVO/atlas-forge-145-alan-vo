@@ -1,30 +1,27 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
 from app.main import app
+from fastapi.testclient import TestClient
 
 
-@pytest.mark.asyncio
-async def test_health_check():
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        response = await client.get("/api/health")
-        assert response.status_code == 200
-        data = response.json()
-        assert data["status"] == "ok"
-        assert data["service"] == "atlas-forge-145-alan-vo"
-        assert data["version"] == "1.0.0"
+client = TestClient(app)
 
 
-@pytest.mark.asyncio
-async def test_media_endpoint_not_found():
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        response = await client.get("/api/media/nonexistent.mp4")
-        assert response.status_code == 404
+def test_health_check():
+    response = client.get("/api/health")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "ok"
+    assert data["service"] == "atlas-forge-145-alan-vo"
+    assert data["version"] == "1.0.0"
 
 
-@pytest.mark.asyncio
-async def test_media_range_parsing():
+def test_media_endpoint_not_found():
+    response = client.get("/api/media/nonexistent.mp4")
+    assert response.status_code == 404
+
+
+def test_media_range_parsing():
     from app.api.media import parse_range_header
     
     # Test bounded range
@@ -48,8 +45,7 @@ async def test_media_range_parsing():
     assert parse_range_header("bytes=abc-", 1000) is None  # invalid format
 
 
-@pytest.mark.asyncio
-async def test_media_open_ended_range_capped():
+def test_media_open_ended_range_capped():
     """Test that open-ended ranges are capped at PIECE_SIZE."""
     from app.api.media import parse_range_header
     from app.core.config import settings
