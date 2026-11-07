@@ -3,6 +3,9 @@
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
 
+> **Current checkpoint: v1.1.0** — Core features implemented and tested. See PLAN.md for roadmap.
+
+
 **Alan Vo | AI & Machine Learning**
 
 An AI/ML developer tool for programmatic video composition and rendering. Write HTML. Render video. Built for agents.
