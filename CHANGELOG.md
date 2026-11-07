@@ -40,3 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Healthchecks on all services
 - CORS restricted to configured origins
 - Secrets via environment variables only
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

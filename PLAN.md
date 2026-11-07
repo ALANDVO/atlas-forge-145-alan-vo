@@ -57,3 +57,6 @@ Acceptance:
 - Errors are redacted
 - CI mocks external calls
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
