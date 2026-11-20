@@ -11,7 +11,8 @@ import time
 from typing import Optional
 from urllib.parse import urlencode
 
-from app.core.config import settings\n_jwt_secret = settings.keycloak_client_secret or "dev-secret-change-in-production"
+from app.core.config import settings
+_jwt_secret = settings.keycloak_client_secret or "dev-secret-change-in-production"
 
 router = APIRouter(tags=["auth"])
 

@@ -1,6 +1,19 @@
 # Changelog
 
+## 1.5.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.4.0 — work-in-progress checkpoint
+
+### Added
+- OIDC authentication with Keycloak (authorization code + PKCE)
+  - Login redirect to Keycloak with PKCE code verifier/challenge
+  - Callback token exchange with state validation
+  - Access token usage for authenticated API calls
+  - Session clearance on logout
+  - Role-based access control (admin/analyst/viewer)
+- Backend tests for OIDC auth (PKCE generation, state validation, role denial, user info)
 
 Partial code published for continued development. Known issues: STATUS.md.
 

@@ -32,7 +32,7 @@
     {
       "id": "oidc-auth",
       "title": "OIDC authentication with Keycloak (authorization code + PKCE)",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Login redirects to Keycloak",
         "Callback exchanges code for tokens with PKCE",
