@@ -55,3 +55,4 @@ venv/
 data/media/
 **/data/media/
 .turbo/
+.venv*/

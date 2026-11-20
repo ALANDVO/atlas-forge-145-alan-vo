@@ -24,7 +24,7 @@ Tests: `backend/app/tests/test_main.py`, `frontend/src/App.test.tsx`
 
 ### oidc-auth — OIDC authentication with Keycloak (authorization code + PKCE)
 
-Status: planned
+Status: done
 
 Acceptance:
 - Login redirects to Keycloak
